@@ -9,6 +9,7 @@ import { signOut, useSession } from 'next-auth/react'
 const Nav = () => {
     const [toggle,setToggle]=useState(false);
     const {data:session} = useSession();
+    const siteTitle = "Ebba Tickets";
   
     
 
@@ -17,7 +18,7 @@ const Nav = () => {
     <nav className='h-[5rem] bg-black flex flex-col  justify-center'>
         {/* DESKTOP NAVIGATION */}
           <section className='max-md:hidden flex items-center justify-between px-10 text-white'>
-        <div className=' flex flex-1 items-center justify-center font-bold text-2xl'><Link href={'/'}><h2 className='font-mono'>Channele</h2></Link></div>
+        <div className=' flex flex-1 items-center justify-center font-bold text-2xl'><Link href={'/'}><h2 className='font-mono'>{siteTitle}</h2></Link></div>
               <div className='flex flex-3 items-center justify-center'>
                 <div> </div>
                 <div className='flex items-center justify-between gap-4'>
@@ -36,7 +37,7 @@ const Nav = () => {
         </section>
         {/* MOBILE NAVIGATION */}
           <section className='md:hidden px-4 flex justify-between items-center'>
-        <div><Link href={'/'}><h2 className='text-white font-bold text-2xl'>Channele</h2></Link></div>
+        <div><Link href={'/'}><h2 className='text-white font-bold text-2xl'>{siteTitle}</h2></Link></div>
               <div className='relative'>
                   <FaBars className='cursor-pointer text-white font-bold text-3xl'  alt='' onClick={()=>setToggle((prev) => !prev)} />
                   {toggle && <div className='h-screen w-full  fixed top-0 left-0 z-10 bg-neutral-800 '> 
