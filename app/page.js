@@ -12,7 +12,7 @@ export default function Home() {
     <main>
       Home
 
-      <Button className={cn("bg-blue-600", pathname === "/" ? "text-white" : "text-gray-300")}>Click Me</Button>
+      <Button className={cn("bg-blue-600", pathname === "/" ? "text-white" : "text-gray-400")}>Click Me</Button>
        </main>
   );
 }
