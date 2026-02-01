@@ -1,7 +1,6 @@
 "use client";
-
 import { usePathname } from "next/navigation";
-import { Button } from "../../../components/ui/button";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export default function Home() {
@@ -9,7 +8,7 @@ export default function Home() {
 
   return (
     <main>
-      Home
+      Home    
       <Button
         className={cn(
           "bg-blue-600",
