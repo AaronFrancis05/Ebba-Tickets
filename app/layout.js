@@ -1,7 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import Nav from "@/components/Nav";
+import Nav from "@/components/nav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
