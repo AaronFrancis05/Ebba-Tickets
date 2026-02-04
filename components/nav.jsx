@@ -2,20 +2,23 @@
 import {FaBars,FaWindowClose ,FaRegWindowClose} from 'react-icons/fa'
 import Link from 'next/link'
 import Image from 'next/image'
+import { SignedOut, SignInButton, UserButton} from '@clerk/nextjs'
 
-import {useState,useEffect} from 'react'
-import { signOut, useSession } from 'next-auth/react'
+import {useState} from 'react'
+import { useAuth } from '@clerk/clerk-react'
+
 
 const Nav = () => {
     const [toggle,setToggle]=useState(false);
-    const {data:session} = useSession();
+    const loggedInUser = null;
     const siteTitle = "Ebba Tickets";
   
+    const user =useAuth();
     
 
     
   return (
-    <nav className='h-[5rem] bg-black flex flex-col  justify-center'>
+    <nav className='h-[5rem] bg-black flex flex-col max-w-6xl mx-auto justify-center sticky top-2 z-10 rounded-4xl'>
         {/* DESKTOP NAVIGATION */}
           <section className='max-md:hidden flex items-center justify-between px-10 text-white'>
         <div className=' flex flex-1 items-center justify-center font-bold text-2xl'><Link href={'/'}><h2 className='font-mono'>{siteTitle}</h2></Link></div>
@@ -28,11 +31,17 @@ const Nav = () => {
                       <Link href={'/'}>Support</Link>
                 </div>
               </div>
-              <div className='flex flex-1 items-center justify-center'>
-          {session && session.user ? <div className='flex w-full gap-8 items-center justify-center'>
-            <button onClick={() => signOut()} className='bg-blue-600  rounded-2xl px-2 py-2 font-bold cursor-pointer hover:bg-blue-400 flex items-center justify-center'>Sign Out</button> 
-            <Image alt='user' className='rounded-full cursor-pointer object-contain' src={session.user.image || '/globe.svg'} width={40} height={40}/>
-          </div>: <Link href='/sign_in' className='bg-blue-600  rounded-2xl px-4 py-2 font-bold cursor-pointer hover:bg-blue-400 flex items-center justify-center'>Sign In</Link>}
+              <div className='flex flex-1 items-center justify-center '>
+          {user.isSignedIn ? <div className='flex w-full gap-8 items-center justify-end '>
+            <UserButton />
+          </div>:
+           <SignedOut>
+              <SignInButton>
+                <button className='bg-blue-600  rounded-2xl
+                 px-4 py-2 font-bold 
+                cursor-pointer hover:bg-blue-400 flex 
+                items-center justify-center'>Sign In</button>
+                </SignInButton></SignedOut>}
               </div>
         </section>
         {/* MOBILE NAVIGATION */}
@@ -49,11 +58,11 @@ const Nav = () => {
                           <Link href='/' className='text-white font-bold' onClick={() => setToggle(false)}>Support</Link>
 
                         <div>
-                {session && session.user ? <div className='flex flex-col gap-4 items-center justify-center'>
-                  <Image onClick={() => setToggle(false)} alt='user' src={session.user.image || '/globe.svg'} width={30} height={30} />
-                  <button onClick={() => {setToggle(false); signOut()}} className='bg-blue-600  rounded-2xl px-2 py-2 font-bold cursor-pointer hover:bg-blue-400 flex items-center justify-center'>Sign Out</button>
+                {user.isSignedIn ? <div className='flex flex-col gap-4 items-center justify-center'>
+                  <Image onClick={() => setToggle(false)} alt='user' src={'/globe.svg'} width={30} height={30} />
+                  <button onClick={() => {setToggle(false); }} className='bg-blue-600  rounded-2xl px-2 py-2 font-bold cursor-pointer hover:bg-blue-400 flex items-center justify-center'>Sign Out</button>
 
-                </div> : <Link href='/sign_in' onClick={() => setToggle(false)} className='bg-blue-600  rounded-2xl px-4 py-2 font-bold cursor-pointer hover:bg-blue-400 flex items-center justify-center'>Sign In</Link>}
+                </div> : <SignedOut><SignInButton className='bg-blue-600  rounded-2xl px-4 py-2 font-bold cursor-pointer hover:bg-blue-400 flex items-center justify-center'>Sign In</SignInButton></SignedOut>}
                         </div>
 
                     </div>

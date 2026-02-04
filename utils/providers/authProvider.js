@@ -1,11 +1,11 @@
 'use client'
-import { SessionProvider } from "next-auth/react"
+import {ClerkProvider} from "@clerk/nextjs";
 
-const AuthProvider = ({children,session}) => {
+const AuthProvider = ({children}) => {
   return (
-    <SessionProvider session={session}>
+    <ClerkProvider >
         {children}
-    </SessionProvider>
+    </ClerkProvider>
   )
 }
 
