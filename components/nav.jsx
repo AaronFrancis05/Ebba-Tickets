@@ -18,7 +18,7 @@ const Nav = () => {
 
     
   return (
-    <nav className='h-[5rem] bg-black flex flex-col  justify-center'>
+    <nav className='h-[5rem] bg-black flex flex-col max-w-6xl mx-auto justify-center sticky top-2 z-10 rounded-4xl'>
         {/* DESKTOP NAVIGATION */}
           <section className='max-md:hidden flex items-center justify-between px-10 text-white'>
         <div className=' flex flex-1 items-center justify-center font-bold text-2xl'><Link href={'/'}><h2 className='font-mono'>{siteTitle}</h2></Link></div>
@@ -31,8 +31,8 @@ const Nav = () => {
                       <Link href={'/'}>Support</Link>
                 </div>
               </div>
-              <div className='flex flex-1 items-center justify-center'>
-          {user.isSignedIn ? <div className='flex w-full gap-8 items-center justify-center'>
+              <div className='flex flex-1 items-center justify-center '>
+          {user.isSignedIn ? <div className='flex w-full gap-8 items-center justify-end '>
             <UserButton />
           </div>:
            <SignedOut>
